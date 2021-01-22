@@ -4,4 +4,4 @@
 /mysql-connector-java-8.0.23/
 /gradle/
 /build/
-/src/main/java/me/name/bot/secrets/*
+src/main/java/me/name/bot/secrets/
