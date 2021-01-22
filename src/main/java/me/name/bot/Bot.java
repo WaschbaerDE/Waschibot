@@ -29,3 +29,4 @@ public class Bot {
         jda.addEventListener(new HelpEvent());
     }
 }
+//command
