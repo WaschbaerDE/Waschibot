@@ -1,4 +1,4 @@
-package me.name.bot;
+package me.name.bot.secrets;
 
 public class Token {
     public String getOAuth2Token(){

@@ -1,5 +1,7 @@
 package me.name.bot.database;
 
+import me.name.bot.secrets.DatabaseSecrets;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 

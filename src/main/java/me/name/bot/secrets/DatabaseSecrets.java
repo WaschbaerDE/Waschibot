@@ -1,4 +1,4 @@
-package me.name.bot.database;
+package me.name.bot.secrets;
 
 public class DatabaseSecrets {
 
