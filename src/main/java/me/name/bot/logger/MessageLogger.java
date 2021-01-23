@@ -19,7 +19,7 @@ public class MessageLogger extends ListenerAdapter {
         String channelID = recentMessage.getChannel().getId();
         String channelName = recentMessage.getChannel().getName();
         String memberId = recentMessage.getMember().getId();
-        String memberName = recentMessage.getMember().getNickname();
+        String memberName = recentMessage.getMember().getEffectiveName();
         String messageId = recentMessage.getId();
         String messageContent = recentMessage.getContentRaw();
 
