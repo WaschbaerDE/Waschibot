@@ -19,13 +19,13 @@ public class Bot {
         Token token = new Token();
 
         jda = JDABuilder.createLight(token.getOAuth2Token(), GatewayIntent.GUILD_MESSAGES)
-                .setActivity(Activity.listening("dir immer"))
+                .setActivity(Activity.listening("dir bei $help"))
                 .setStatus(OnlineStatus.ONLINE)
                 .build();
-
+        jda.addEventListener(new HelloEvent());
         jda.addEventListener(new MessageLogger());
         jda.addEventListener(new CommandListener());
-        jda.addEventListener(new HelloEvent());
+
     }
 }
 
