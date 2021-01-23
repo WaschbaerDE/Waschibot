@@ -1,10 +1,9 @@
 package me.name.bot;
 
+import me.name.bot.secrets.*;
 import me.name.bot.events.CommandListener;
 import me.name.bot.events.HelloEvent;
-import me.name.bot.events.HelpEvent;
 import me.name.bot.logger.MessageLogger;
-import me.name.bot.secrets.Token;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
