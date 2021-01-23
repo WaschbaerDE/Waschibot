@@ -3,10 +3,9 @@ package me.name.bot.events;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class HelpEvent extends ListenerAdapter {
+public class HelpEvent {
 
-    @Override
-    public void onMessageReceived(MessageReceivedEvent e) {
+    public void executeHelpEvent(MessageReceivedEvent e) {
         String rawContent = e.getMessage().getContentRaw();
         if(rawContent.startsWith("$") && rawContent.startsWith("help",1)){
             System.out.println("Event happening");

@@ -10,7 +10,10 @@ public class CommandListener extends ListenerAdapter {
         String rawContent = e.getMessage().getContentRaw();
         if(rawContent.startsWith("$") && !rawContent.startsWith(" ",1)){
             System.out.println("Event happening");
-
+            if(rawContent.startsWith("help",1)){
+                HelpEvent helpEvent = new HelpEvent();
+                helpEvent.executeHelpEvent(e);
+            }
         }
     }
 }

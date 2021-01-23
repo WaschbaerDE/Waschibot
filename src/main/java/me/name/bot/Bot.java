@@ -1,5 +1,6 @@
 package me.name.bot;
 
+import me.name.bot.events.CommandListener;
 import me.name.bot.events.HelloEvent;
 import me.name.bot.events.HelpEvent;
 import me.name.bot.logger.MessageLogger;
@@ -17,15 +18,14 @@ public class Bot {
     {
         Token token = new Token();
 
-        jda = JDABuilder.createLight(token.getTestOAuth2Token(), GatewayIntent.GUILD_MESSAGES)
+        jda = JDABuilder.createLight(token.getOAuth2Token(), GatewayIntent.GUILD_MESSAGES)
                 .setActivity(Activity.listening("dir immer"))
                 .setStatus(OnlineStatus.ONLINE)
                 .build();
 
         jda.addEventListener(new MessageLogger());
-
+        jda.addEventListener(new CommandListener());
         jda.addEventListener(new HelloEvent());
-        jda.addEventListener(new HelpEvent());
     }
 }
 
