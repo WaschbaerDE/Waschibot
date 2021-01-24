@@ -14,3 +14,4 @@ public class MessageLogger extends ListenerAdapter {
        sqlWriter.writeMessageToDatabase();
     }
 }
+//

@@ -55,4 +55,5 @@ public class SqlWriter {
         ExecuteSqlCommand executeSqlCommand = new ExecuteSqlCommand();
         executeSqlCommand.executeSqlCommand("INSERT INTO t_user(userId, userName, datetime_start) VALUES('" + this.memberId + "','" + this.memberName + "','" + this.currentDateTime + "');");
     }
+    //
 }

@@ -24,7 +24,6 @@ public class Bot {
         jda.addEventListener(new HelloEvent());
         jda.addEventListener(new MessageLogger());
         jda.addEventListener(new CommandListener());
-
     }
 }
 
