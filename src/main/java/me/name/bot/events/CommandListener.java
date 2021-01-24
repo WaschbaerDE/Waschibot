@@ -11,6 +11,7 @@ public class CommandListener extends ListenerAdapter {
         if(rawContent.startsWith("$") && !rawContent.startsWith(" ",1)){
             System.out.println("Event happening");
             if(rawContent.startsWith("help",1)){
+                System.out.println("__Help_Event_triggered!");
                 HelpEvent helpEvent = new HelpEvent();
                 helpEvent.executeHelpEvent(e);
             }
