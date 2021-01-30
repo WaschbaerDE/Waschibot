@@ -17,7 +17,7 @@ public class HelpEvent {
             embedBuilder.addField("Image-Commands","$rndpic 1-5",false);
             embedBuilder.addField("Quote-Commands","$addq @quoteduser quote <-needs permission ($addqoterrank)",false);
             embedBuilder.addField("Musik-Commands","coming soooooon",false);
-            embedBuilder.addField("Admin-Commands","Only Owner can do this!\n$addqoterrank @quoterrank <-this rank gives permission to add quotes",false);
+            embedBuilder.addField("Admin-Commands","Only Owner can do this!\n$addquoterrank @quoterrank <-this rank gives permission to add quotes",false);
             embedBuilder.setFooter("send by Waschibot");
             embedBuilder.setTimestamp(Instant.now());
 
