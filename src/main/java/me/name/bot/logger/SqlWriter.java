@@ -27,7 +27,7 @@ public class SqlWriter {
         memberName = recentMessage.getMember().getEffectiveName();
         messageId = recentMessage.getId();
         messageContent = recentMessage.getContentRaw();
-        currentDateTime = simpleDateFormat.format(new Date());   }
+        currentDateTime = simpleDateFormat.format(new Date());}
 
     public void writeMessageToDatabase() {
         writeMessageToDatabase_guild_message();
@@ -53,7 +53,7 @@ public class SqlWriter {
 
     private void writeMessageToDatabase_user() {
         ExecuteSqlCommand executeSqlCommand = new ExecuteSqlCommand();
-        executeSqlCommand.executeSqlCommand("INSERT INTO t_user(userId, userName, datetime_start) VALUES('" + this.memberId + "','" + this.memberName + "','" + this.currentDateTime + "');");
+        executeSqlCommand.executeSqlCommand("INSERT INTO t_user(guildId, userId, userName, datetime_start) VALUES('" + this.guildId + "','" + this.memberId + "','" + this.memberName + "','" + this.currentDateTime + "');");
     }
-    //
+
 }

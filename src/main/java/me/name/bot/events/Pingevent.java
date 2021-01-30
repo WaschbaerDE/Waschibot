@@ -6,7 +6,7 @@ public class Pingevent {
 
     public void executePingEvent(MessageReceivedEvent e){
         if(Math.random()<0.1){
-            e.getChannel().sendMessage("Ping").queue();
+            e.getChannel().sendMessage("Ping!").queue();
             try {
                 wait(1000);
             } catch (InterruptedException interruptedException) {
@@ -18,4 +18,5 @@ public class Pingevent {
             e.getChannel().sendMessage("Pong!").queue();
         }
     }
+
 }
