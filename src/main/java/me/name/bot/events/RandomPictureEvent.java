@@ -1,5 +1,6 @@
 package me.name.bot.events;
 
+import me.name.bot.util.Generator;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.io.BufferedReader;
@@ -17,13 +18,12 @@ public class RandomPictureEvent {
             e.getChannel().sendMessage(getImageURL()).queue();
         }
     }
-    //get ranom lowercase ascii
-    public static char generateRndAscii(){
-        return (char)((int)(Math.random()*27)+97);
-    }
+
+
     //get random prntscrn url
     public static String generateRndURL(){
-        return "https://prnt.sc/"+generateRndAscii()+generateRndAscii()+generateRndAscii()+generateRndAscii()+generateRndAscii()+generateRndAscii();
+        Generator generator = new Generator();
+        return "https://prnt.sc/"+generator.generateRndChar()+generator.generateRndChar()+generator.generateRndChar()+generator.generateRndChar()+generator.generateRndChar()+generator.generateRndChar();
     }
     //getImageURL of random prntscrn url
     public static String getImageURL(){
