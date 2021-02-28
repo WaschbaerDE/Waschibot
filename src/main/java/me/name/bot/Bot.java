@@ -19,7 +19,7 @@ public class Bot {
     //This command is to initialize the jda(DiscordBot)
     //It needs at least the ".createLight(Token, GatewayIntent.GUILD_MESSAGE).build()"
     //Other attributes are used for modification rigth away
-        jda = JDABuilder.createLight(token.getOAuth2Token(), GatewayIntent.GUILD_MESSAGES)
+        jda = JDABuilder.createLight(token.getTestOAuth2Token(), GatewayIntent.GUILD_MESSAGES)
                 .setActivity(Activity.listening("dir bei $help"))
                 .setStatus(OnlineStatus.ONLINE)
                 .build();

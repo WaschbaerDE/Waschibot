@@ -1,23 +1,29 @@
 package test;
 
 public class testmain {
-    public static void main(String[] args){
-        for(int i=0;i<100;i++){
-            System.out.println(generateRndChar());
+    public static void main(String[] args) {
+        try {
+            String messageString = "$asd";
+            String[] messageArray = new String[3];
+            messageArray[0] = messageString.substring(0, 1);
+            String[] placeholderArray = messageString.substring(1).trim().split(" ");
+            System.out.println("Length: " + placeholderArray.length);
+            for (int i = 1; i < placeholderArray.length && i < 3; i++) {
+                messageArray[i] = placeholderArray[i - 1];
+            }
+            if(placeholderArray.length==1){
+                messageArray[1]=messageString.substring(1);
+            }
+
+            for (int i = 0; i < 3; i++) {
+                System.out.println(messageArray[i]);
+            }
+
+
+
+        }catch (Exception e){
+            System.out.println(e);
+            e.printStackTrace();
         }
     }
-
-        public static char generateRndLetter(){return (char)((int)(Math.random()*26)+97);}
-        public static char generateRndDigit(){return(char)((int)(Math.random()*10)+48); }
-
-
-        //get random [a-z]or[0-9]
-        public static char generateRndChar(){
-            if(Math.random()*37<27){
-                return generateRndLetter();
-            }else{
-                return generateRndDigit();
-            }
-        }
-
 }
