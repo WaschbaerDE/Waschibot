@@ -1,20 +1,18 @@
-package me.name.bot.logger;
+package me.name.bot.Misc;
 
-import me.name.bot.database.DatabaseConnector;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.sql.Statement;
+import me.name.bot.secrets.DatabaseSecrets;
 
-public class ExecuteSqlCommand {
+import java.sql.*;
+
+public class SqlUtil {
     private String sqlStatement;
 
     public void executeSqlCommand(String sqlStatement) {
         this.sqlStatement = sqlStatement;
         try {
-            DatabaseConnector sqlConnector = new DatabaseConnector();
+            Util util = new Util();
 
-            Connection connection = sqlConnector.getSqlConnection();
+            Connection connection = getSqlConnection();
             Statement statement = connection.createStatement();
             statement.execute(this.sqlStatement);
             connection.close();
@@ -30,11 +28,12 @@ public class ExecuteSqlCommand {
         this.sqlStatement = sqlStatement;
         ResultSet rs = null;
         try {
-            DatabaseConnector sqlConnector = new DatabaseConnector();
+            Util util = new Util();
 
-            Connection connection = sqlConnector.getSqlConnection();
+            Connection connection = getSqlConnection();
             Statement statement = connection.createStatement();
             rs = statement.executeQuery(this.sqlStatement);
+            connection.close();
         } catch (Exception e) {
             System.err.println("Sql-Command couldn't get executed: " + this.sqlStatement);
             e.printStackTrace();
@@ -42,4 +41,16 @@ public class ExecuteSqlCommand {
         return rs;
 
     }
+
+    public Connection getSqlConnection() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            DatabaseSecrets secrets = new DatabaseSecrets();
+            return DriverManager.getConnection(secrets.getUrl() + secrets.getDatabase(), secrets.getUser(), secrets.getPassword());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

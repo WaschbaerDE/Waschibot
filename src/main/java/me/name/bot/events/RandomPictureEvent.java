@@ -1,6 +1,6 @@
 package me.name.bot.events;
 
-import me.name.bot.util.Generator;
+import me.name.bot.Misc.Util;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.io.BufferedReader;
@@ -22,8 +22,8 @@ public class RandomPictureEvent {
 
     //get random prntscrn url
     public static String generateRndURL(){
-        Generator generator = new Generator();
-        return "https://prnt.sc/"+generator.generateRndChar()+generator.generateRndChar()+generator.generateRndChar()+generator.generateRndChar()+generator.generateRndChar()+generator.generateRndChar();
+        Util util = new Util();
+        return "https://prnt.sc/"+util.generateRndChar()+util.generateRndChar()+util.generateRndChar()+util.generateRndChar()+util.generateRndChar()+util.generateRndChar();
     }
     //getImageURL of random prntscrn url
     public static String getImageURL(){
