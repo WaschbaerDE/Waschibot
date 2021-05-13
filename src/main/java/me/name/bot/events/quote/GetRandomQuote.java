@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
 
-public class GetRandomQuoteEvent {
+public class GetRandomQuote {
     private String guildId;
     private ResultSet rs;
     private int positionquote;

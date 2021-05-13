@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ChangePrefixEvent {
+public class ChangePrefix {
 
     private String currentDateTime;
     private String prefix;

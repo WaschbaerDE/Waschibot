@@ -1,17 +1,17 @@
 package me.name.bot.listeners;
 
-import me.name.bot.events.administration.SetBotStatus;
+import me.name.bot.events.administration.SetBotActivity;
 import me.name.bot.events.quote.AddQuoteEvent;
-import me.name.bot.events.quote.GetRandomQuoteEvent;
+import me.name.bot.events.quote.GetRandomQuote;
 import me.name.bot.events.quote.SetQuoterRank;
 import me.name.bot.events.*;
 import me.name.bot.Misc.SqlStatements;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import java.sql.SQLException;
+import java.util.Locale;
 
 public class TextChannelListener extends ListenerAdapter {
 
@@ -45,7 +45,7 @@ public class TextChannelListener extends ListenerAdapter {
             //random picture event
             else if(messageArray[0].equals("rndpic")){
                 System.out.println("__RandomPicture_event_triggered!");
-                RandomPictureEvent randomPictureEvent = new RandomPictureEvent();
+                RandomPicture randomPictureEvent = new RandomPicture();
                 int anzahl = 1;
                 try{
                     anzahl = Integer.parseInt(messageArray[1]);
@@ -65,7 +65,7 @@ public class TextChannelListener extends ListenerAdapter {
             //rndQuote event
             else if(messageArray[0].equals("rndq")){
                 System.out.println("__RndQuote_event_triggered!");
-                GetRandomQuoteEvent randomQuoteEvent = new GetRandomQuoteEvent();
+                GetRandomQuote randomQuoteEvent = new GetRandomQuote();
                 try {
                     randomQuoteEvent.randomQuoteEvent(e);
                 } catch (SQLException throwables) {
@@ -90,15 +90,15 @@ public class TextChannelListener extends ListenerAdapter {
             //changeprefix event
             else if(messageArray[0].equals("changeprefix")){
                 System.out.println("__ChangePrefix_event_triggered!");
-                ChangePrefixEvent changePrefixEvent = new ChangePrefixEvent();
+                ChangePrefix changePrefixEvent = new ChangePrefix();
                 changePrefixEvent.executeChangePrefixEvent(e,messageArray);
             }
         //GlobalAdmin
             //setBotStatus event
             else if(messageArray[0].equals("setbotstatus")){
                 System.out.println("__SetBotStatus_event_triggered!");
-                SetBotStatus setBotStatus = new SetBotStatus();
-                setBotStatus.setBotStatusEvent(e);
+                SetBotActivity setBotStatus = new SetBotActivity();
+                setBotStatus.setBotActivityEvent(e, messageArray[1]);
             }
         //Misc
             //unknown command
@@ -111,7 +111,7 @@ public class TextChannelListener extends ListenerAdapter {
             writeMessageToConsole(e);
     }
     private String[] splitStringToArray(String string){
-        return string.substring(1).split(" ");
+        return string.substring(1).toLowerCase(Locale.ROOT).split(" ");
     }
 
     private void logMessageInDataBase(MessageReceivedEvent event){

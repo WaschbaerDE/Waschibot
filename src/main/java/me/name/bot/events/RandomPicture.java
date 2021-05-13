@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class RandomPictureEvent {
+public class RandomPicture {
 
     //execute randomPictureEvent
     public void executeRandomPictureEvent(MessageReceivedEvent e,int count){
