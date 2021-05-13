@@ -1,21 +1,25 @@
 package me.name.bot.Misc;
 
-import me.name.bot.Misc.SqlUtil;
 import net.dv8tion.jda.api.entities.Message;
+
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SqlStatements {
 
     private final String guildId;
-    private String guildName;
-    private String channelID;
-    private String channelName;
-    private String memberId;
-    private String memberName;
-    private String messageId;
-    private String messageContent;
-    private String currentDateTime;
+    private final String guildName;
+    private final String channelID;
+    private final String channelName;
+    private final String userId;
+    private final String userName;
+    private final String messageId;
+    private final String messageContent;
+    private final String currentDateTime;
+
+    private ResultSet rs;
+
 
     public SqlStatements(Message recentMessage){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -24,8 +28,8 @@ public class SqlStatements {
         this.guildName = recentMessage.getGuild().getName();
         this.channelID = recentMessage.getChannel().getId();
         this.channelName = recentMessage.getChannel().getName();
-        this.memberId = recentMessage.getMember().getId();
-        this.memberName = recentMessage.getMember().getEffectiveName();
+        this.userId = recentMessage.getMember().getId();
+        this.userName = recentMessage.getMember().getEffectiveName();
         this.messageId = recentMessage.getId();
         this.messageContent = recentMessage.getContentRaw();
         currentDateTime = simpleDateFormat.format(new Date());}
@@ -40,23 +44,45 @@ public class SqlStatements {
 
     private void writeMessageToDatabase_guild_message() {
         SqlUtil sqlUtil = new SqlUtil();
-        sqlUtil.executeSqlCommand("INSERT INTO t_guild_messages( guildId, channelId, memberId,  messageId, messageContent, datetime) VALUES ('" + this.guildId + "','" + this.channelID + "','" + this.memberId + "','" + this.messageId + "','" + this.messageContent + "','" + this.currentDateTime + "');");
+        sqlUtil.executeSqlCommand("INSERT INTO t_guild_messages( guildId, channelId, memberId,  messageId, messageContent, datetime) VALUES ('" + this.guildId + "','" + this.channelID + "','" + this.userId + "','" + this.messageId + "','" + this.messageContent + "','" + this.currentDateTime + "');");
     }
 
     private void writeMessageToDatabase_guild() {
         SqlUtil sqlUtil = new SqlUtil();
-        sqlUtil.executeSqlCommand("INSERT INTO t_guild(guildId, guildName, datetime_start) VALUES('" + this.guildId + "','" + this.guildName + "','" + this.currentDateTime + "');");
+        this.rs = sqlUtil.executeSelectSqlCommand("SELECT id FROM t_guild where guildID = '"+this.channelID+"' AND guildName <> '"+this.channelName +"';");
+        try {
+            if(rs.isBeforeFirst()){
+                sqlUtil.executeSqlCommand("INSERT INTO t_guild(guildId, guildName, datetime_start) VALUES('" + this.guildId + "','" + this.guildName + "','" + this.currentDateTime + "');");
+            }
+            while (rs.next()){
+                sqlUtil.executeSqlCommand("UPDATE t_guild SET datetime_end = '"+currentDateTime+"' WHERE id = '"+ rs.getInt(1)+"';");
+            }
+        }catch (Exception ignored){}
     }
 
     private void writeMessageToDatabase_channel() {
         SqlUtil sqlUtil = new SqlUtil();
-        sqlUtil.executeSqlCommand("INSERT INTO t_channel(channelId, channelName, datetime_start) VALUES('" + this.channelID + "','" + this.channelName + "','" + this.currentDateTime + "');");
+        this.rs = sqlUtil.executeSelectSqlCommand("SELECT id FROM t_channel where channelID = '"+this.channelID+"' AND channelName <> '"+this.channelName +"';");
+        try {
+            if(rs.isBeforeFirst()){
+                sqlUtil.executeSqlCommand("INSERT INTO t_channel(channelId, channelName, datetime_start) VALUES('" + this.channelID + "','" + this.channelName + "','" + this.currentDateTime + "');");
+            }
+            while (rs.next()){
+                sqlUtil.executeSqlCommand("UPDATE t_channel SET datetime_end = '"+currentDateTime+"' WHERE id = '"+ rs.getInt(1)+"';");
+            }
+        }catch (Exception ignored){}
     }
 
     private void writeMessageToDatabase_user() {
         SqlUtil sqlUtil = new SqlUtil();
-        sqlUtil.executeSqlCommand("INSERT INTO t_user(guildId, userId, userName, datetime_start) VALUES('" + this.guildId + "','" + this.memberId + "','" + this.memberName + "','" + this.currentDateTime + "');");
+        this.rs = sqlUtil.executeSelectSqlCommand("SELECT id FROM t_user where guildId = '"+this.guildId+"' AND userId = '"+this.userId +"' AND userName <> '"+this.userName +"';");
+        try {
+            if(rs.isBeforeFirst()){
+                sqlUtil.executeSqlCommand("INSERT INTO t_user(guildId, userId, userName, datetime_start) VALUES('" + this.guildId + "','" + this.userId + "','" + this.userName + "','" + this.currentDateTime + "');");
+            }
+            while (rs.next()){
+                sqlUtil.executeSqlCommand("UPDATE t_user SET datetime_end = '"+currentDateTime+"' WHERE id = '"+ rs.getInt(1)+"';");
+            }
+        }catch (Exception ignored){}
     }
-
-
 }

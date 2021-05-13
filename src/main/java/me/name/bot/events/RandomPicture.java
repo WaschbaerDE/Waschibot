@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 
 public class RandomPicture {
 
@@ -23,7 +24,7 @@ public class RandomPicture {
     //get random prntscrn url
     public static String generateRndURL(){
         Util util = new Util();
-        return "https://prnt.sc/"+util.generateRndChar()+util.generateRndChar()+util.generateRndChar()+util.generateRndChar()+util.generateRndChar()+util.generateRndChar();
+        return "https://prnt.sc/"+ Util.generateRndChar()+ Util.generateRndChar()+ Util.generateRndChar()+ Util.generateRndChar()+ Util.generateRndChar()+ Util.generateRndChar();
     }
     //getImageURL of random prntscrn url
     public static String getImageURL(){
@@ -53,7 +54,7 @@ public class RandomPicture {
     //convert InputStream to String
     private static String toString(InputStream inputStream) throws IOException
     {
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8")))
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8)))
         {
             String inputLine;
             StringBuilder stringBuilder = new StringBuilder();

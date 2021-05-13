@@ -33,7 +33,6 @@ public class SqlUtil {
             Connection connection = getSqlConnection();
             Statement statement = connection.createStatement();
             rs = statement.executeQuery(this.sqlStatement);
-            connection.close();
         } catch (Exception e) {
             System.err.println("Sql-Command couldn't get executed: " + this.sqlStatement);
             e.printStackTrace();
@@ -46,7 +45,7 @@ public class SqlUtil {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             DatabaseSecrets secrets = new DatabaseSecrets();
-            return DriverManager.getConnection(secrets.getUrl() + secrets.getDatabase(), secrets.getUser(), secrets.getPassword());
+            return DriverManager.getConnection(DatabaseSecrets.getUrl() + DatabaseSecrets.getDatabase(), DatabaseSecrets.getUser(), DatabaseSecrets.getPassword());
         } catch (Exception e) {
             e.printStackTrace();
             return null;

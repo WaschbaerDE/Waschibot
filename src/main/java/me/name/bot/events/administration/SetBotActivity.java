@@ -20,7 +20,6 @@ public  class SetBotActivity {
             String messageContent = e.getMessage().getContentRaw().substring(24,e.getMessage().getContentRaw().indexOf("http://"));
             String streamUrl = "https://www.twitch.tv/WaschbaerDE";
             try {
-                //check if substring is valid streaming url
                 String url = messageContent.substring(messageContent.indexOf("http://"));
                 if(Activity.isValidStreamingUrl(url)){
                     streamUrl = url;

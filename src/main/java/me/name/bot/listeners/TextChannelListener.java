@@ -94,11 +94,13 @@ public class TextChannelListener extends ListenerAdapter {
                 changePrefixEvent.executeChangePrefixEvent(e,messageArray);
             }
         //GlobalAdmin
-            //setBotStatus event
-            else if(messageArray[0].equals("setbotstatus")){
-                System.out.println("__SetBotStatus_event_triggered!");
-                SetBotActivity setBotStatus = new SetBotActivity();
-                setBotStatus.setBotActivityEvent(e, messageArray[1]);
+            //setBotStatus event //User ID Waschbär#0042
+            else if (e.getMember().getId().equals("232537573409554432")){
+                if(messageArray[0].equals("setbotstatus")){
+                    System.out.println("__SetBotStatus_event_triggered!");
+                    SetBotActivity setBotStatus = new SetBotActivity();
+                    setBotStatus.setBotActivityEvent(e, messageArray[1]);
+                }
             }
         //Misc
             //unknown command
@@ -110,6 +112,7 @@ public class TextChannelListener extends ListenerAdapter {
             logMessageInDataBase(e);
             writeMessageToConsole(e);
     }
+
     private String[] splitStringToArray(String string){
         return string.substring(1).toLowerCase(Locale.ROOT).split(" ");
     }
