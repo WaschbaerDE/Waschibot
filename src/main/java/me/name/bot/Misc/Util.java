@@ -1,10 +1,6 @@
 package me.name.bot.Misc;
 
-import me.name.bot.secrets.DatabaseSecrets;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
 
 public class Util {
 
