@@ -49,7 +49,7 @@ public class SqlStatements {
 
     private void writeMessageToDatabase_guild() {
         SqlUtil sqlUtil = new SqlUtil();
-        this.rs = sqlUtil.executeSelectSqlCommand("SELECT id FROM t_guild where guildID = '"+this.channelID+"' AND guildName <> '"+this.channelName +"';");
+        this.rs = sqlUtil.executeSelectSqlCommand("SELECT id FROM t_guild where guildID = '"+this.channelID+"' AND guildName <> '"+this.channelName +"' AND datetime_end = '999-12-31 23:59:59';");
         try {
             if(rs.isBeforeFirst()){
                 sqlUtil.executeSqlCommand("INSERT INTO t_guild(guildId, guildName, datetime_start) VALUES('" + this.guildId + "','" + this.guildName + "','" + this.currentDateTime + "');");
@@ -62,7 +62,7 @@ public class SqlStatements {
 
     private void writeMessageToDatabase_channel() {
         SqlUtil sqlUtil = new SqlUtil();
-        this.rs = sqlUtil.executeSelectSqlCommand("SELECT id FROM t_channel where channelID = '"+this.channelID+"' AND channelName <> '"+this.channelName +"';");
+        this.rs = sqlUtil.executeSelectSqlCommand("SELECT id FROM t_channel where channelID = '"+this.channelID+"' AND channelName <> '"+this.channelName +"' AND datetime_end = '999-12-31 23:59:59';");
         try {
             if(rs.isBeforeFirst()){
                 sqlUtil.executeSqlCommand("INSERT INTO t_channel(channelId, channelName, datetime_start) VALUES('" + this.channelID + "','" + this.channelName + "','" + this.currentDateTime + "');");
@@ -75,7 +75,7 @@ public class SqlStatements {
 
     private void writeMessageToDatabase_user() {
         SqlUtil sqlUtil = new SqlUtil();
-        this.rs = sqlUtil.executeSelectSqlCommand("SELECT id FROM t_user where guildId = '"+this.guildId+"' AND userId = '"+this.userId +"' AND userName <> '"+this.userName +"';");
+        this.rs = sqlUtil.executeSelectSqlCommand("SELECT id FROM t_user where guildId = '"+this.guildId+"' AND userId = '"+this.userId +"' AND userName <> '"+this.userName +"' AND datetime_end = '999-12-31 23:59:59';");
         try {
             if(rs.isBeforeFirst()){
                 sqlUtil.executeSqlCommand("INSERT INTO t_user(guildId, userId, userName, datetime_start) VALUES('" + this.guildId + "','" + this.userId + "','" + this.userName + "','" + this.currentDateTime + "');");
